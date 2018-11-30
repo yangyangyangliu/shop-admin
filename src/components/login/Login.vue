@@ -1,21 +1,20 @@
 <template>
   <div class="login">
-    <el-row :gutter="10">
-      <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-        <div class="grid-content bg-purple"></div>
+    <el-row class="login" type="flex" justify="center" align="middle">
+      <el-col :xs="12" :sm="12" :md="10" :lg="8" :xl="6">
+        <el-form label-position="top" :model="loginForm" :rules="rules" ref="ruleForm" label-width="100px" class="login-form">
+          <el-form-item label="用户名" prop="username">
+            <el-input v-model="loginForm.username"></el-input>
+          </el-form-item>
+          <el-form-item type="password" label="密码" prop="password">
+            <el-input v-model="loginForm.password"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+          </el-form-item>
+        </el-form>
       </el-col>
-      <el-form label-position="top" :model="loginForm" :rules="rules" ref="ruleForm" label-width="100px" class="login-form">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="loginForm.username"></el-input>
-        </el-form-item>
-        <el-form-item type="password" label="密码" prop="password">
-          <el-input v-model="loginForm.password"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
-        </el-form-item>
-      </el-form>
     </el-row>
   </div>
 </template>

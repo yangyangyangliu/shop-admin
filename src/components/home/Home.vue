@@ -1,11 +1,5 @@
 <template>
-  <el-container>
-    <el-header>Header</el-header>
-    <el-container>
-      <el-aside width="200px">Aside</el-aside>
-      <el-main>Main</el-main>
-    </el-container>
-  </el-container>
+  <h1>这是home组件</h1>
 </template>
 
 <script>
