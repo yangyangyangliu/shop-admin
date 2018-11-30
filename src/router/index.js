@@ -14,5 +14,20 @@ const router = new Router({
     { path: '/home', component: Home }
   ]
 })
+// 导航守卫
+// router.beforeEach 注册一个全局前置守卫：
+router.beforeEach((to, form, next) => {
+  // 1 如果访问的是登录页，直接展示登录页面
+  if (to.path === '/login') {
+    return next()
+  }
+  // 判断有没有登录
+  const token = localStorage.getItem('token')
+  if (token) {
+    next()
+  } else {
+    next('/login')
+  }
+})
 
 export default router

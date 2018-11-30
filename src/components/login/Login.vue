@@ -1,17 +1,22 @@
 <template>
   <div class="login">
-    <el-form label-position="top" :model="loginForm" :rules="rules" ref="ruleForm" label-width="100px" class="login-form">
-      <el-form-item label="用户名" prop="username">
-        <el-input v-model="loginForm.username"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input v-model="loginForm.password"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
-      </el-form-item>
-    </el-form>
+    <el-row :gutter="10">
+      <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
+        <div class="grid-content bg-purple"></div>
+      </el-col>
+      <el-form label-position="top" :model="loginForm" :rules="rules" ref="ruleForm" label-width="100px" class="login-form">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="loginForm.username"></el-input>
+        </el-form-item>
+        <el-form-item type="password" label="密码" prop="password">
+          <el-input v-model="loginForm.password"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-row>
   </div>
 </template>
 
@@ -66,14 +71,16 @@ export default {
         axios
           .post('http://localhost:8888/api/private/v1/login', this.loginForm)
           .then(res => {
-            // console.log('登录结果为:', res)
+            console.log('登录结果为:', res)
             if (res.data.meta.status === 200) {
-              // 登录成功跳转到首页
+              // 2. 保存token到localStorage中
+              localStorage.setItem('token', res.data.data.token)
+              // 1. 登录成功跳转到首页
               this.$router.push('/home')
               this.$message({
                 message: res.data.meta.msg,
                 type: 'success',
-                duration: 1000
+                duration: 800
               })
             } else {
               // 登录失败 重新登录
